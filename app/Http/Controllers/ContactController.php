@@ -38,7 +38,17 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contact = new Contact;
+        $contact->title = $request->contact_title;
+        $contact->phone = $request->contact_phone;
+        $contact->address = $request->contact_address;
+        $contact->email = $request->contact_email;
+        $contact->country = $request->contact_country;
+        $contact->city = $request->contact_city;
+
+        $contact->save();
+        return redirect()->route("contact.index");
+
     }
 
     /**
@@ -49,7 +59,8 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        return view('contact.show',["contact" => $contact]);
+
     }
 
     /**
@@ -60,7 +71,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return view("contact.edit", ["contact" => $contact]);
     }
 
     /**
@@ -72,7 +83,15 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $contact->title = $request->contact_title;
+        $contact->phone = $request->contact_phone;
+        $contact->address = $request->contact_address;
+        $contact->email = $request->contact_email;
+        $contact->country = $request->contact_country;
+        $contact->city = $request->contact_city;
+
+        $contact->save();
+        return redirect()->route("contact.index");
     }
 
     /**
@@ -83,6 +102,8 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        //NEVEIKIA
+        $contact->delete();
+        return redirect()->route("contact.index");
     }
 }

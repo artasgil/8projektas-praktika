@@ -46,10 +46,10 @@ Route::prefix('contact')->group(function () {
     Route::get('','ContactController@index')->name('contact.index');
     Route::get('create', 'ContactController@create')->name('contact.create');
     Route::post('store', 'ContactController@store')->name('contact.store');
-    Route::get('edit/{type}', 'ContactController@edit')->name('contact.edit');
-    Route::post('update/{type}', 'ContactController@update')->name('contact.update');
-    Route::post('delete/{type}', 'ContactController@destroy' )->name('contact.destroy');
-    Route::get('show/{type}', 'ContactController@show')->name('contact.show');
+    Route::get('edit/{contact}', 'ContactController@edit')->name('contact.edit');
+    Route::post('update/{contact}', 'ContactController@update')->name('contact.update');
+    Route::post('delete/{contact}', 'ContactController@destroy' )->name('contact.destroy');
+    Route::get('show/{contact}', 'ContactController@show')->name('contact.show');
 
 });
 

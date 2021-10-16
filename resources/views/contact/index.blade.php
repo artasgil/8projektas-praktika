@@ -8,10 +8,13 @@
 
     <tr>
         <th> ID </th>
-        <th> Company Title </th>
+        <th> Contact title </th>
         <th> Phone </th>
         <th> Address </th>
         <th> E-mail </th>
+        <th> Counrty </th>
+        <th> City </th>
+
         <th> Show </th>
         <th> Edit </th>
         <th> Delete </th>
@@ -24,6 +27,9 @@
         <td>{{$contact->phone}} </td>
         <td>{{$contact->address}} </td>
         <td>{{$contact->email}} </td>
+        <td>{{$contact->country}} </td>
+        <td>{{$contact->city}} </td>
+
         <td>
             <a href="{{route('contact.show',[$contact])}}" class="btn btn-secondary">Show </a>
         </td>

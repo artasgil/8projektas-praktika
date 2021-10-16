@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Create Contact') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('type.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('contact.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -26,7 +26,6 @@
                                 <input id="contact_phone" type="text" class="form-control" name="contact_phone" required autofocus>
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="contact_address" class="col-md-4 col-form-label text-md-right">{{ __('Contact address') }}</label>
 
@@ -34,7 +33,6 @@
                                 <input id="contact_address" type="text" class="form-control" name="contact_address" required autofocus>
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="contact_email" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
 
@@ -42,9 +40,23 @@
                                 <input id="contact_email" type="text" class="form-control" name="contact_email" required autofocus>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="contact_country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="contact_country" type="text" class="form-control" name="contact_country" required autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="contact_city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="contact_city" type="text" class="form-control" name="contact_city" required autofocus>
+                            </div>
+                        </div>
 
                         {{-- <div class="form-group row">
-                            <label for="type_companyid" class="col-md-4 col-form-label text-md-right">{{ __('Company ID') }}</label>
+                            <label for="contact_companyid" class="col-md-4 col-form-label text-md-right">{{ __('Company ID') }}</label>
                             <div class="col-md-6">
                                 <select class="form-control" name="type_companyid">
                                     @foreach ($companies as $company)
