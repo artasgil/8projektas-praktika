@@ -10,6 +10,6 @@ $factory->define(Type::class, function (Faker $faker) {
     return [
         'title' => $faker->title(),
         'description' => $faker->sentence(10),
-        'company_id'=>factory(Company::class)->create()->id
+        'company_id'=> factory(Company::class)->create()->id
     ];
 });

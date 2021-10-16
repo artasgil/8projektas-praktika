@@ -9,9 +9,10 @@
 
     <tr>
         <th> ID </th>
-        <th> Title </th>
+        <th> Phone title </th>
         <th> Description </th>
         <th> Logo </th>
+        <th> Company phone </th>
         <th> Show </th>
         <th> Edit </th>
         <th> Delete </th>
@@ -23,6 +24,7 @@
         <td>{{$company->title}} </td>
         <td>{!! $company->description !!} </td>
         <td><img src="{{ $company->logo }}" alt="{{$company->title}}" width="50" height="50"></td>
+        <td>{{$company->companyContact->phone}}</td>
         <td>
             <a href="{{route('company.show',[$company])}}" class="btn btn-secondary">Show </a>
         </td>
