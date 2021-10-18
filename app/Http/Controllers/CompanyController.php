@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Contact;
+use App\Type;
+
+
+
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -25,8 +30,12 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        $companies = Company::all();
-        return view("company.create", ["companies" => $companies]);
+        // $companies = Company::all();
+        $contacts = Contact::all();
+
+
+        // $contacts = $c->companyContact;
+        return view("company.create", ["contacts" => $contacts]);
     }
 
     /**
@@ -40,20 +49,26 @@ class CompanyController extends Controller
         $company = new Company;
         $company->title = $request->company_title;
         $company->description = $request->company_description;
+        $company->contact_id = $request->company_contact_phone;
 
         if($request->has('company_logo'))
         {
             $imageName = time().'.'.$request->company_logo->extension();
             $company->logo = '/images/'.$imageName;
             $request->company_logo->move(public_path('images'), $imageName);
+        } else {
+            $company->logo = '/images/noimage.png';
         }
-        // } else {
-        //     $company->logo = '/images/placeholder.png';
-        // }
 
-        $company->save();
 
-        return redirect()->route("company.index");
+
+        if($company->save()) {
+            return redirect()->route("company.index")->with('sucess_message','Sekmingai');
+        }else{
+
+         redirect()->route("company.create")->with('error_message','Nesekmingai');
+        }
+
     }
 
     /**
@@ -75,8 +90,10 @@ class CompanyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Company $company)
+
     {
-        return view('company.edit',["company" => $company]);
+        $contacts = Contact::all();
+        return view('company.edit',["company" => $company, "contacts"=>$contacts]);
 
     }
 
@@ -91,16 +108,17 @@ class CompanyController extends Controller
     {
         $company->title = $request->company_title;
         $company->description = $request->company_description;
+        $company->contact_id = $request->company_contact_phone;
+
 
         if($request->has('company_logo'))
         {
             $imageName = time().'.'.$request->company_logo->extension();
             $company->logo = '/images/'.$imageName;
             $request->company_logo->move(public_path('images'), $imageName);
+        } else {
+            $company->logo = '/images/noimage.png';
         }
-        // } else {
-        //     $company->logo = '/images/placeholder.png';
-        // }
 
         $company->save();
 
@@ -115,7 +133,12 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
+        $types_count = $company->companyTypeAll->count();
+        if($types_count!==0) {
+            return redirect()->route("company.index")->with('error_message','Company can not be deleted, because has type');
+        }
         $company->delete();
-        return redirect()->route("company.index");
+        return redirect()->route("company.index")->with('sucess_message','Company deleted successfully');
     }
 }
+

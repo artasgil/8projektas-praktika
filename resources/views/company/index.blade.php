@@ -4,12 +4,24 @@
 
 @section('content')
 <div class="container">
+    @if(session()->has('error_message'))
+    <div class="alert alert-danger">
+    {{session()->get("error_message")}}
+    </div>
+    @endif
+
+    @if(session()->has('sucess_message'))
+    <div class="alert alert-success">
+    {{session()->get("sucess_message")}}
+    </div>
+    @endif
     <a href="{{route('company.create')}}" class="btn btn-success">Add company</a>
     <table class="table table-striped">
 
     <tr>
         <th> ID </th>
-        <th> Phone title </th>
+        <th>Company type</th>
+        <th> Company title </th>
         <th> Description </th>
         <th> Logo </th>
         <th> Company phone </th>
@@ -21,6 +33,12 @@
     @foreach ($companies as $company)
     <tr>
         <td>{{$company->id}} </td>
+
+        <td>
+        @foreach ($company->companyTypeAll as $type)
+          {{$type->title}}
+        @endforeach
+        </td>
         <td>{{$company->title}} </td>
         <td>{!! $company->description !!} </td>
         <td><img src="{{ $company->logo }}" alt="{{$company->title}}" width="50" height="50"></td>

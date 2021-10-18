@@ -8,6 +8,7 @@
 
     <tr>
         <th> ID </th>
+        <th>Company name</th>
         <th> Contact title </th>
         <th> Phone </th>
         <th> Address </th>
@@ -23,6 +24,12 @@
     @foreach ($contacts as $contact)
     <tr>
         <td>{{$contact->id}} </td>
+        <td>
+            @foreach ($contact->companyContact as $company)
+                {{$company->title}}
+            @endforeach
+
+        </td>
         <td>{{$contact->title}}</td>
         <td>{{$contact->phone}} </td>
         <td>{{$contact->address}} </td>
