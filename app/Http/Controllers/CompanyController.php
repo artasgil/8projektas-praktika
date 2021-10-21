@@ -46,6 +46,13 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'company_title' => 'required',
+            'company_description' => 'required',
+            'company_contact_phone' => 'required',
+        ]);
+
+
         $company = new Company;
         $company->title = $request->company_title;
         $company->description = $request->company_description;
@@ -59,15 +66,9 @@ class CompanyController extends Controller
         } else {
             $company->logo = '/images/noimage.png';
         }
+        $company->save();
 
-
-
-        if($company->save()) {
-            return redirect()->route("company.index")->with('sucess_message','Sekmingai');
-        }else{
-
-         redirect()->route("company.create")->with('error_message','Nesekmingai');
-        }
+        return redirect()->route("company.index")->with('success', 'Data Added');
 
     }
 

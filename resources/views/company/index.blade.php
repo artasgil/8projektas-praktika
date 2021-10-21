@@ -15,6 +15,13 @@
     {{session()->get("sucess_message")}}
     </div>
     @endif
+
+    @if(session()->has('success'))
+    <div class="alert alert-success">
+    {{session()->get('success')}}
+    </div>
+    @endif
+
     <a href="{{route('company.create')}}" class="btn btn-success">Add company</a>
     <table class="table table-striped">
 
